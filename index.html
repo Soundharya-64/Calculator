@@ -88,17 +88,26 @@
             background-color: darkgray;
         }
 
-        .wrapper .button-wrapper .clear{
+        .wrapper .button-wrapper .space{
+            margin-bottom:5px;
+            background-color:rgb(119, 119, 111);
+            font-size: 15px;
+            cursor: pointer;
+            display:block;
+            text-align:center;
+        }
+        .wrapper .button-wrapper .clear,.backspace{
             border-radius: 10px;
-            margin:0px 100px 10px 110px;
-            text-align: center;
-            background-color:blanchedalmond;
             font-size: 15px;
             padding:7px;
-            cursor: pointer;
-            border:none
+            text-align: center;
+            background-color: white;
+            color:black;
+            font-weight: bolder;
+            border:none;
+            margin:0px 10px;
         }
-        .wrapper .button-wrapper .clear:hover{
+        .wrapper .button-wrapper .clear:hover,.backspace:hover{
             font-size:20px;
             color:white;
             font-weight: bolder;
@@ -147,7 +156,10 @@
                         <td><button value="/" onclick="eval(14)">/</button></td>
                     </tr>
                 </table>
+                <div class="space">
                 <button class="clear" onclick="dis(17);">Clear</button>
+                <button class="backspace" onclick="dis(18);"><-</button>
+            </div>
             </div>
         </div>
     </div>
@@ -155,6 +167,12 @@
         var v1;
         var add=false,div=false,mul=false,sub=false;
         function dis(v){
+            if(v==18){
+                let m=document.getElementById("text").value;
+                document.getElementById("text").value=m.substr(0,m.length-1);
+                let n=document.getElementById("inner").innerHTML;
+                document.getElementById("inner").innerHTML=n.substr(0,n.length-1);
+            }
             if(v==17){
                 document.getElementById("text").value="";
                 document.getElementById("inner").innerHTML="";
@@ -210,7 +228,7 @@
             v2=document.getElementById("text").value;
             if(add==true){
             sum=Number(v1)+Number(v2);
-            document.getElementById("text").value=sum;
+            document.getElementById("text").value=sum.toFixed(1);
             document.getElementById("inner").innerHTML+=" = ";
             add=false;
             }
@@ -222,13 +240,13 @@
             }
             if(mul==true){
             sum=Number(v1)*Number(v2);
-            document.getElementById("text").value=sum;
+            document.getElementById("text").value=sum.toFixed(1);
             document.getElementById("inner").innerHTML+=" = ";
             mul=false;
             }
             if(div==true){
             sum=Number(v1)/Number(v2);
-            document.getElementById("text").value=sum;
+            document.getElementById("text").value=sum.toFixed(1);
             document.getElementById("inner").innerHTML+=" = ";
             div=false;
             }
